@@ -49,7 +49,6 @@ async function initPostgresRepo(
   return repo;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function initMockRepo(): Promise<Repository> {
   const repo = new MockRepository();
   return repo;
@@ -131,7 +130,6 @@ async function initServer(
   server.use("/auth", authMiddleware);
 
   server.use("/api", apiHandler);
-  // server.use("/webhook/loke", lokeEventHandler.getRouter());
 
   server.use(httpKit.createErrorMiddleware(logger.withPrefix("http-error")));
 
@@ -157,7 +155,6 @@ export async function start() {
     "https://addon-metrics.loke.global"
   );
   let pushInterval: NodeJS.Timer | null;
-  let archiveInterval: NodeJS.Timer | null;
 
   const logger = rootLogger.withPrefix("server");
 
@@ -174,24 +171,8 @@ export async function start() {
   ]);
   const lokeApiClientFactory = await initLokeApi(logger);
   const lokeApiClient = await lokeApiClientFactory.asClient();
-  // const streakTracker = new StreakTracker(
-  //   repo,
-  //   lokeApiClient,
-  //   logger.withPrefix("streak-tracker")
-  // );
-
-  // const lokeEventHandler = new LokeEventHandler(
-  //   // streakTracker,
-  //   logger.withPrefix("loke-events")
-  // );
 
   const apiHandler = initApi(repo, lokeApiClientFactory, config);
-
-  function archive() {
-    // streakTracker.archiveExpiredStreaks(new Date()).catch((err) => {
-    //   console.error(err.stack);
-    // });
-  }
 
   const httpServer = await initServer(
     repo,
@@ -209,8 +190,6 @@ export async function start() {
   });
 
   pushInterval = setInterval(pushMetrics, 60000);
-  archiveInterval = setInterval(archive, 60000);
-
   logger.info("Waiting for stop signal");
 
   // Await stop signal
@@ -221,9 +200,7 @@ export async function start() {
   // Stop
   await shutdown();
   clearInterval(pushInterval);
-  clearInterval(archiveInterval);
   pushInterval = null;
-  archiveInterval = null;
 
   logger.info("Closing database connection...");
   await repo.destroy();
