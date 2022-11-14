@@ -1,0 +1,34 @@
+{
+  "name": "LOKE Addon: Fidel",
+  "description": "A LOKE addon to give frequently transacting customers the VIP treatment.",
+  "repository": "https://github.com/LOKE/addon-fidel",
+  "logo": "https://images.squarespace-cdn.com/content/v1/624171331a08f57801674eb2/f03d8d61-f9dd-4af2-b4bb-2d669d6425aa/LOKE-logo.png?format=100w",
+  "addons": [
+    "heroku-postgresql:hobby-basic"
+  ],
+  "keywords": [
+    "loke",
+    "addon",
+    "segments",
+    "fidel"
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "LOKE_CLIENT_ID": {
+      "description": "Provided by LOKE for API access",
+      "value": ""
+    },
+    "LOKE_CLIENT_SECRET": {
+      "description": "Provided by LOKE for API access",
+      "value": ""
+    },
+    "COOKIE_KEY": {
+      "description": "This gets generated",
+      "generator": "secret"
+    },
+    "BASE_URL": {
+      "description": "Base URL is used to generate callback URLs",
+      "value": ""
+    }
+  }
+}
