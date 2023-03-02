@@ -4,7 +4,7 @@ export const LOKE_API_URL =
   process.env.LOKE_API_URL ?? "https://api-next.loke.global";
 export const BASE_URL = process.env.BASE_URL ?? "http://localhost:3000";
 export const LOKE_ISSUER =
-  process.env.LOKE_ISSUER ?? "https://auth-next.loke.global";
+  process.env.LOKE_ISSUER ?? "https://auth.loke.global";
 export const LOKE_CLIENT_ID = process.env.LOKE_CLIENT_ID ?? "";
 if (!LOKE_CLIENT_ID) throw new Error("LOKE_CLIENT_ID is required");
 export let LOKE_CLIENT_SECRET = "";

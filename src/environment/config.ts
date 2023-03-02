@@ -23,7 +23,7 @@ export const lokeWebhookSecret = process.env.WEBHOOK_SECRET;
 export const lokeClientId = process.env.LOKE_CLIENT_ID;
 export const lokeClientSecret = process.env.LOKE_CLIENT_SECRET;
 export const lokeIssuerUrl: string =
-  process.env.LOKE_ISSUER_URL || "https://auth-next.loke.global/";
+  process.env.LOKE_ISSUER_URL || "https://auth.loke.global/";
 
 export const cookieKeys: string[] = [
   process.env.COOKIE_KEY,
